@@ -1,4 +1,4 @@
-<div *ngIf="!control.valid && (control.touched || control.dirty); else noteTemplate">
+<div *ngIf="control && !control.valid && (control.touched || control.dirty); else noteTemplate">
     <div *ngIf="control.status === 'PENDING'; else errorTemplate" style="color: grey;">Checking ...</div>
 </div>
 
@@ -8,5 +8,5 @@
     </div>
 </ng-template>
 <ng-template #noteTemplate>
-    <div style="color: grey;">{{ note }}</div>
+    <div style="color: grey;">xx {{ note }}</div>
 </ng-template>

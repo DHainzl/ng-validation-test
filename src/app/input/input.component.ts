@@ -20,7 +20,17 @@ import { ValidatorMessageFn } from '../validation-line/validation-errors.pipe';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppInputComponent implements ControlValueAccessor, Validator {
-    @Input() validationControl: AbstractControl;
+    _internalValidationControl: AbstractControl;
+
+    _validationControl: AbstractControl;
+    get validationControl() {
+        return this._validationControl || this._internalValidationControl;
+    }
+    @Input()
+    set validationControl(control: AbstractControl) {
+        this._validationControl = control;
+    }
+
     @Input() note: string;
     @Input() validationMessages: { [ validator: string ]: ValidatorMessageFn } = {};
 
@@ -50,6 +60,8 @@ export class AppInputComponent implements ControlValueAccessor, Validator {
     }
 
     validate(control: AbstractControl): ValidationErrors {
+        this._internalValidationControl = control;
+
         if (control.value === 'foo') {
             return { foobar: true };
         }
