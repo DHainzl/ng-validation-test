@@ -1,0 +1,2 @@
+<input type="text" (blur)="onBlur()" [ngModel]="value" (ngModelChange)="onValueChange($event)" />
+<app-validation-line [control]="validationControl" note="note" [validationMessages]="validationMessages"></app-validation-line>

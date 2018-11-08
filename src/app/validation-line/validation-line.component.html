@@ -1,0 +1,12 @@
+<div *ngIf="!control.valid && (control.touched || control.dirty); else noteTemplate">
+    <div *ngIf="control.status === 'PENDING'; else errorTemplate" style="color: grey;">Checking ...</div>
+</div>
+
+<ng-template #errorTemplate>
+    <div style="color: red;">
+        {{ control.errors | validationErrors:validationMessages }}
+    </div>
+</ng-template>
+<ng-template #noteTemplate>
+    <div style="color: grey;">{{ note }}</div>
+</ng-template>
